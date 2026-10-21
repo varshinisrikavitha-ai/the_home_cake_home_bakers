@@ -78,7 +78,7 @@ function Gallery() {
 }
 
 function HowToOrder() {
-  return <section className="order-strip"><div className="container"><div className="order-intro"><div className="eyebrow light"><span /> Simple as three steps</div><h2>From craving to<br /><em>celebration.</em></h2></div><div className="steps">{[['01', 'Explore', 'Browse the flavours and find your kind of cake.'], ['02', 'Enquire', 'Tell us your occasion, weight and design needs on WhatsApp.'], ['03', 'Confirm', 'Finalise price, availability and arrangements directly with us.']].map(([num, title, text]) => <div className="step" key={num}><span>{num}</span><h3>{title}</h3><p>{text}</p></div>)}</div><a className="button light-button" href={whatsappUrl('Hi The Home Cafe Home Baker! I would like to enquire about a cake for my celebration.')} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Start a WhatsApp enquiry</a></div></section>
+  return <section className="order-strip"><div className="container"><div className="order-intro"><div className="eyebrow light"><span /> Simple as three steps</div><h2>From craving to<br /><em>celebration.</em></h2></div><div className="steps">{[['01', 'Explore', 'Browse the flavours and find your kind of cake.'], ['02', 'Enquire', 'Tell us your occasion, weight and design needs on WhatsApp.'], ['03', 'Confirm', 'Finalise price, availability and arrangements directly with us.']].map(([num, title, text]) => <div className="step" key={num}><span>{num}</span><h3>{title}</h3><p>{text}</p></div>)}</div></div></section>
 }
 
 function About() {
