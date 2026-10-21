@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { motion } from 'framer-motion'
 import { ArrowRight, CakeSlice, ChevronDown, Clock3, Heart, Instagram, MapPin, Menu, MessageCircle, Phone, Sparkles, Star, X } from 'lucide-react'
 import './styles.css'
+import './contact.css'
 
 const WHATSAPP = '919080419891'
 const whatsappUrl = (message) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`
@@ -85,7 +86,18 @@ function About() {
 }
 
 function Visit() {
-  return <section className="section visit-section" id="visit"><div className="container visit-grid"><div className="visit-copy"><SectionHeading eyebrow="Come find us" title={<>Your next favourite<br /><em>cake is here.</em></>} /><div className="address"><MapPin size={20} /><p><b>The Home Cafe Home Baker</b><br />Muthunaickenpatti<br />Salem, Tamil Nadu, India</p></div><div className="contact-actions"><a className="button primary" href="tel:+919080419891"><Phone size={16} /> Call now</a><a className="button whatsapp" href={whatsappUrl('Hi The Home Cafe Home Baker! I am at/near your store and would like some help.')} target="_blank" rel="noreferrer"><MessageCircle size={16} /> WhatsApp</a><a className="outline-button" href="https://www.google.com/maps/search/?api=1&query=The+Home+Cafe+Home+Baker+Muthunaickenpatti+Salem+Tamil+Nadu" target="_blank" rel="noreferrer">Get directions <ArrowRight size={15} /></a></div></div><div className="hours-card"><div className="hours-icon"><Clock3 size={22} /></div><h3>Contact us</h3><div className="hours-row"><span>Phone / WhatsApp</span><b>+91 90804 19891</b></div><div className="hours-row"><span>Email</span><b>homecafe2912@gmail.com</b></div><div className="hours-note"><span /> Please contact us for current availability and ordering details.</div></div></div></section>
+  const [contact, setContact] = useState({ name: '', phone: '', message: '' })
+  const [contactError, setContactError] = useState('')
+  const submitContact = (e) => {
+    e.preventDefault()
+    if (!contact.name || !contact.phone || !contact.message) {
+      setContactError('Please add your name, contact number and message.')
+      return
+    }
+    setContactError('')
+    window.open(whatsappUrl(`Hi The Home Cafe Home Baker! I would like to get in touch.\n\nName: ${contact.name}\nContact: ${contact.phone}\nMessage: ${contact.message}`), '_blank')
+  }
+  return <section className="section visit-section" id="visit"><div className="container visit-grid"><div className="visit-copy"><SectionHeading eyebrow="Come find us" title={<>Your next favourite<br /><em>cake is here.</em></>} /><div className="address"><MapPin size={20} /><p><b>The Home Cafe Home Baker</b><br />Muthunaickenpatti<br />Salem, Tamil Nadu, India</p></div><div className="contact-actions"><a className="button primary" href="tel:+919080419891"><Phone size={16} /> Call now</a><a className="button whatsapp" href={whatsappUrl('Hi The Home Cafe Home Baker! I am at/near your store and would like some help.')} target="_blank" rel="noreferrer"><MessageCircle size={16} /> WhatsApp</a><a className="outline-button" href="https://www.google.com/maps/search/?api=1&query=The+Home+Cafe+Home+Baker+Muthunaickenpatti+Salem+Tamil+Nadu" target="_blank" rel="noreferrer">Get directions <ArrowRight size={15} /></a></div></div><div className="hours-card contact-card"><div className="contact-card-top"><div className="hours-icon"><MessageCircle size={22} /></div><span>We would love to hear from you</span></div><h3>Send us a message</h3><form className="contact-form" onSubmit={submitContact}><label>Name *<input value={contact.name} onChange={(e) => setContact({ ...contact, name: e.target.value })} placeholder="Your name" /></label><label>Phone / WhatsApp *<input value={contact.phone} onChange={(e) => setContact({ ...contact, phone: e.target.value })} placeholder="+91" type="tel" /></label><label>How can we help? *<textarea value={contact.message} onChange={(e) => setContact({ ...contact, message: e.target.value })} placeholder="Tell us about your cake or celebration..." rows="3" /></label>{contactError && <div className="form-error" role="alert">{contactError}</div>}<button className="button dark full" type="submit">Continue on WhatsApp <ArrowRight size={16} /></button></form><div className="contact-card-details"><a href="mailto:homecafe2912@gmail.com">homecafe2912@gmail.com</a><span>Usually replies through WhatsApp</span></div></div></div></section>
 }
 
 function Footer() {
